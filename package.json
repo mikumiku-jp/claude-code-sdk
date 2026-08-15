@@ -1,0 +1,42 @@
+{
+  "name": "claude-code-sdk",
+  "version": "0.1.0",
+  "description": "Unofficial SDK that talks to the Claude API through Claude Code's subscription auth",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "prepublishOnly": "tsc"
+  },
+  "keywords": [
+    "claude",
+    "anthropic",
+    "claude-code",
+    "sdk",
+    "ai"
+  ],
+  "license": "GPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mikumiku-jp/claude-code-sdk"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.52.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0"
+  }
+}
