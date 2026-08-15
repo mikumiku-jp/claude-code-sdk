@@ -1,4 +1,4 @@
-# claude-code-sdk
+# claude-cc-sdk
 
 An SDK that talks to the Claude API using Claude Code's subscription auth.
 
@@ -20,7 +20,7 @@ With this SDK, setting `redact: false` gives you the raw thinking content in pla
 ## Install
 
 ```bash
-npm install claude-code-sdk
+npm install claude-cc-sdk
 ```
 
 ## Prerequisites
@@ -38,7 +38,7 @@ To use an API key instead, set the `ANTHROPIC_API_KEY` environment variable.
 ### Get text
 
 ```ts
-import { Claude } from "claude-code-sdk";
+import { Claude } from "claude-cc-sdk";
 
 const c = new Claude();
 
@@ -214,6 +214,4 @@ GPL-3.0
 
 This is an unofficial project created for educational and research purposes.
 It is not affiliated with, endorsed by, or supported by Anthropic.
-
-This serves as a reference implementation for understanding how Claude Code CLI constructs its API requests — a learning resource for studying the API protocol.
 The author assumes no responsibility for any consequences arising from the use of this software.

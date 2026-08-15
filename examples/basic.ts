@@ -1,4 +1,4 @@
-import { Claude } from "../src/index.js";
+import { Claude } from "claude-cc-sdk";
 
 const c = new Claude({ model: "claude-haiku-4-5-20251001" });
 

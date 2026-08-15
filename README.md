@@ -1,4 +1,4 @@
-# claude-code-sdk
+# claude-cc-sdk
 
 [English](README.en.md)
 
@@ -22,7 +22,7 @@ Claude Codeのネイティブthinkingは `redacted_thinking` として暗号化�
 ## インストール
 
 ```bash
-npm install claude-code-sdk
+npm install claude-cc-sdk
 ```
 
 ## 前提
@@ -40,7 +40,7 @@ APIキーを使う場合は `ANTHROPIC_API_KEY` 環境変数を設定する。
 ### テキストを取得する
 
 ```ts
-import { Claude } from "claude-code-sdk";
+import { Claude } from "claude-cc-sdk";
 
 const c = new Claude();
 
@@ -219,6 +219,4 @@ GPL-3.0
 
 このプロジェクトは教育・研究目的で作成された、非公式のソフトウェアである。
 Anthropicおよびその関連サービスとは無関係であり、公式のサポートや推奨を受けていない。
-
-Claude Code CLIがどのようにAPIリクエストを構築するかを調査・理解するためのリファレンス実装であり、APIプロトコルの学習教材として公開している。
 このソフトウェアの使用によって生じた結果について、作者は一切の責任を負わない。

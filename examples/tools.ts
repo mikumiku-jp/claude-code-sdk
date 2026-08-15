@@ -1,12 +1,12 @@
-import { Claude } from "../src/index.js";
+import { Claude } from "claude-cc-sdk";
 
 const c = new Claude({ model: "claude-haiku-4-5-20251001" });
 
 const r = await c.send({
-  messages: [{ role: "user", content: "東京の天気" }],
+  messages: [{ role: "user", content: "Weather in Tokyo?" }],
   tools: [{
     name: "weather",
-    description: "Get weather",
+    description: "Get weather for a city",
     input_schema: { type: "object" as const, properties: { city: { type: "string" } }, required: ["city"] },
   }],
 });
