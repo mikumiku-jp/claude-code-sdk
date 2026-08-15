@@ -1,5 +1,8 @@
 # claude-cc-sdk
 
+[![npm](https://img.shields.io/npm/v/claude-cc-sdk)](https://www.npmjs.com/package/claude-cc-sdk)
+[![license](https://img.shields.io/npm/l/claude-cc-sdk)](LICENSE)
+
 An SDK that talks to the Claude API using Claude Code's subscription auth.
 
 If you're logged in to Claude Code, it works without an API key.

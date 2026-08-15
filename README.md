@@ -1,5 +1,8 @@
 # claude-cc-sdk
 
+[![npm](https://img.shields.io/npm/v/claude-cc-sdk)](https://www.npmjs.com/package/claude-cc-sdk)
+[![license](https://img.shields.io/npm/l/claude-cc-sdk)](LICENSE)
+
 [English](README.en.md)
 
 Claude Codeのサブスクリプション認証を使って、Claude APIを自由に叩くためのSDK。
