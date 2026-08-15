@@ -65,6 +65,17 @@ console.log(r.stop_reason); // "end_turn" | "tool_use" | ...
 `send` はAnthropicの `Message` オブジェクトをそのまま返す。
 `content` の中身は `r.content.filter(b => b.type === "text")` のようにフィルタする。
 
+### システムプロンプト
+
+サブスクリプション認証では、システムプロンプトは5000文字までに制限されている。
+
+```ts
+await c.send({
+  system: "あなたは優秀なエンジニアです。簡潔に回答してください。",
+  messages: [{ role: "user", content: "Hello" }],
+});
+```
+
 ### オプションを渡す
 
 ```ts

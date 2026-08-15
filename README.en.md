@@ -60,6 +60,17 @@ console.log(r.stop_reason); // "end_turn" | "tool_use" | ...
 
 `send` returns the raw Anthropic `Message` object.
 
+### System prompt
+
+With subscription auth, system prompts are limited to 5000 characters.
+
+```ts
+await c.send({
+  system: "You are a helpful engineer. Be concise.",
+  messages: [{ role: "user", content: "Hello" }],
+});
+```
+
 ### Options
 
 ```ts
