@@ -15,12 +15,14 @@ Claude Codeでログイン済みなら、APIキー不要でそのまま動く。
 Claude Codeのサブスクリプション（Pro/Max/Team）はOAuth認証を使い、リクエストごとに特定のヘッダとメタデータを送る。
 これが欠けると、同じOAuthトークンでもレートリミットに当たったり、一部の機能が使えなかったりする。
 
-このSDKは、Claude Codeの公式バイナリが送るリクエストと同一の形式を再現する。
+このSDKは、Claude Code公式バイナリの対話型 `cli` 経路が送るリクエスト形式をデフォルトで再現する。
+`interactive: false` を指定すると、非対話型 `sdk-cli`（`--print`）経路に切り替えられる。
 認証情報はmacOSキーチェーン（または`~/.claude/.credentials.json`）から自動で読み取る。
 
 もう一つの用途がある。
-Claude Codeのネイティブthinkingは `redacted_thinking` として暗号化されて返る。
-このSDKでは `redact: false` を指定するだけで、推論の内容が平文で取得できる。
+Claude Codeの対話型経路では、ネイティブthinkingは `redacted_thinking` として暗号化されて返る。
+このSDKも対話型経路をデフォルトにしているため、`redact` のデフォルトは `true`。
+`redact: false` を指定すると `redact-thinking` ベータヘッダを省略し、推論内容を平文で取得できる。
 
 ## インストール
 
@@ -86,7 +88,7 @@ const r = await c.send({
   ],
   thinking: true,          // adaptive thinking ON
   effort: "high",          // 出力品質レベル
-  redact: false,           // thinking を平文で取得
+  redact: false,           // redact-thinking ベータヘッダを送らない
   maxTokens: 16000,
 });
 
@@ -159,6 +161,7 @@ new Claude({
   maxRetries: 2,                // リトライ回数
   baseURL: "https://...",       // APIエンドポイント
   betas: ["..."],               // 追加ベータヘッダ
+  interactive: true,             // CC対話型経路（デフォルト。falseでsdk-cli相当）
 })
 ```
 
@@ -185,7 +188,7 @@ new Claude({
 | `stop` | `string[]` | 停止シーケンス |
 | `speed` | `"fast"` | 高速モード |
 | `ctx1m` | `boolean` | 1Mコンテキスト |
-| `redact` | `boolean` | thinking暗号化（デフォルト: `true`） |
+| `redact` | `boolean` | thinking暗号化ベータを送る（interactive時のデフォルト: `true`） |
 | `cache` | `boolean` | プロンプトキャッシュ（デフォルト: `true`） |
 | `signal` | `AbortSignal` | キャンセル |
 | `timeout` | `number` | タイムアウト（ms） |
@@ -207,7 +210,7 @@ new Claude({
 Claude Codeは推論内容を `redacted_thinking` ブロックとして暗号化して返す。
 この挙動はリクエストに含まれる `redact-thinking` ベータヘッダによって制御されている。
 
-このSDKでは `redact: false` を指定すると、そのヘッダを送らない。
+このSDKでは `redact: false` を指定すると、そのヘッダを送らない。`interactive: false` の場合も、`redact` 未指定ではヘッダを送らない。
 結果として、`thinking` ブロックに推論テキストが平文で格納される。
 
 ```ts

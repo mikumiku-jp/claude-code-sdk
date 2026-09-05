@@ -13,12 +13,14 @@ System prompts, thinking, effort, tools, streaming — all under your control.
 Claude Code subscriptions (Pro/Max/Team) use OAuth and send specific headers and metadata with every request.
 Without those, the same OAuth token hits rate limits or loses access to certain features.
 
-This SDK reproduces the exact request format of the official Claude Code binary.
+This SDK reproduces the request format of the official Claude Code binary's interactive `cli` path by default.
+Set `interactive: false` to use the non-interactive `sdk-cli` (`--print`) path.
 Auth credentials are read automatically from the macOS Keychain or `~/.claude/.credentials.json`.
 
 There's another reason this SDK is useful.
-Claude Code's native thinking comes back as `redacted_thinking` — encrypted, unreadable.
-With this SDK, setting `redact: false` gives you the raw thinking content in plain text.
+The interactive Claude Code path returns native thinking as `redacted_thinking` — encrypted, unreadable.
+This SDK also targets the interactive path by default, so `redact` defaults to `true`.
+Set `redact: false` to omit the `redact-thinking` beta header and expose the thinking content in plain text.
 
 ## Install
 
@@ -81,7 +83,7 @@ const r = await c.send({
   ],
   thinking: true,          // adaptive thinking ON
   effort: "high",
-  redact: false,           // get raw thinking in plain text
+  redact: false,           // omit the redact-thinking beta header
   maxTokens: 16000,
 });
 
@@ -154,6 +156,7 @@ new Claude({
   maxRetries: 2,
   baseURL: "https://...",
   betas: ["..."],               // additional beta headers
+  interactive: true,             // interactive CC path (default; false = sdk-cli)
 })
 ```
 
@@ -180,7 +183,7 @@ Auth priority:
 | `stop` | `string[]` | Stop sequences |
 | `speed` | `"fast"` | Fast mode |
 | `ctx1m` | `boolean` | 1M context window |
-| `redact` | `boolean` | Encrypt thinking (default: `true`) |
+| `redact` | `boolean` | Send the thinking-redaction beta (default: `true` in interactive mode) |
 | `cache` | `boolean` | Prompt caching (default: `true`) |
 | `signal` | `AbortSignal` | Cancellation |
 | `timeout` | `number` | Timeout in ms |
@@ -202,7 +205,7 @@ Pass a `string` as shorthand for `{ messages: [{ role: "user", content: "..." }]
 Claude Code encrypts thinking content into `redacted_thinking` blocks.
 This behavior is controlled by the `redact-thinking` beta header included in requests.
 
-Setting `redact: false` omits that header.
+Setting `redact: false` omits that header. With `interactive: false`, omitting `redact` also omits it.
 The result: `thinking` blocks contain the raw reasoning text in plain text.
 
 ```ts
