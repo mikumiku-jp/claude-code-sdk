@@ -36,7 +36,7 @@
   "license": "GPL-3.0-only",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mikumiku-jp/claude-code-sdk"
+    "url": "https://github.com/mikumiku-jp/claude-cc-sdk"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "0.112.1"
